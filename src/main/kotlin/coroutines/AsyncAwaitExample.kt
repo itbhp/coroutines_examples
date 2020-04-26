@@ -1,17 +1,30 @@
 package coroutines
 
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import kotlin.system.measureTimeMillis
 
 fun main() = runBlocking {
-    val time = measureTimeMillis {
+    val time = concurrent()
+    println("Concurrent completed in $time ms")
+    
+    val timeSequential = sequential()
+    println("Sequential completed in $timeSequential ms")
+}
+
+private suspend fun sequential(): Long =
+    measureTimeMillis {
+        val one = doSomethingUsefulOne()
+        val two = doSomethingUsefulTwo()
+        println("The answer is ${one + two}")
+    }
+
+
+private suspend fun concurrent(): Long = coroutineScope {
+    return@coroutineScope measureTimeMillis {
         val one = async { doSomethingUsefulOne() }
         val two = async { doSomethingUsefulTwo() }
         println("The answer is ${one.await() + two.await()}")
     }
-    println("Completed in $time ms")
 }
 
 suspend fun doSomethingUsefulOne(): Int {
