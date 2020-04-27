@@ -1,5 +1,6 @@
 package coroutines
 
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.slf4j.Logger
@@ -17,6 +18,8 @@ fun main() =  runBlocking<Unit> {
         7
     }
     log("The answer is ${a.await() * b.await()}")
+    
+    log("My job is ${this.coroutineContext[Job]}")
 }
 
 fun log(s: String) {
