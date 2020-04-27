@@ -1,10 +1,8 @@
 package coroutines
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.newSingleThreadContext
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
+@ObsoleteCoroutinesApi
 fun main(): Unit {
     val context = newSingleThreadContext("MyOwnThread")
     runBlocking<Unit> {
