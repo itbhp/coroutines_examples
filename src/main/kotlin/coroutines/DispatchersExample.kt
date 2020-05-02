@@ -3,9 +3,9 @@ package coroutines
 import kotlinx.coroutines.*
 
 @ObsoleteCoroutinesApi
-fun main(): Unit {
+fun main() {
     val context = newSingleThreadContext("MyOwnThread")
-    runBlocking<Unit> {
+    runBlocking {
         launch { // context of the parent, main runBlocking coroutine
             println("main runBlocking      : I'm working in thread ${Thread.currentThread().name}")
         }
